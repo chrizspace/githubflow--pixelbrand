@@ -8,6 +8,10 @@ The repository uses this promotion flow:
 feature/* -> dev -> release -> prod
 ```
 
+`dev` is the repository's default branch. The former `main` branch was
+retired because it had no commits that were not already represented by the
+promotion branches.
+
 Merged pull requests create one semantic version tag on the merged promotion
 commit:
 
