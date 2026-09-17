@@ -25,12 +25,15 @@ after a minor or major promotion. When no tag exists, versioning starts at
 
 ### Repository setup
 
-1. Create a repository secret named `GH_PAT`. The token owner must be allowed
-   to bypass the protection rules for `dev` and `release`, and the token needs
-   repository contents write access.
-2. Protect `dev`, `release`, and `prod` according to the repository's review
-   policy. Keep the workflows' `GH_PAT` checkout for mergeback jobs so direct
-   synchronization pushes can update protected branches.
+1. Create a repository secret named `GH_PAT` using a token owned by the
+   repository administrator with repository contents write access. This
+   personal-account repository cannot configure user-specific bypass actors,
+   so administrator enforcement is disabled on the promotion branches for
+   the mergeback jobs.
+2. `dev`, `release`, and `prod` are protected with one required pull-request
+   approval; force pushes and branch deletions are disabled. Keep the
+   workflows' `GH_PAT` checkout for mergeback jobs so direct synchronization
+   pushes can update the protected branches.
 3. Create the `release:minor` and `release:patch` labels.
 4. Open pull requests for each promotion. Once a pull request is merged, the
    matching workflow bumps the version and performs the required mergebacks.
